@@ -5,7 +5,7 @@ import { WordsProviderService } from './words-provider.service';
  selector:'word-display',
  templateUrl:'./word-display.component.html',
  //styleUrls: ['./word-display.component.css'],
-  providers:[WordsProviderService]
+ providers: [WordsProviderService]
 })
 
 export class WordDisplayComponent {
@@ -20,10 +20,6 @@ export class WordDisplayComponent {
      constructor(private wordsService:WordsProviderService) {}
 
      GetRelevantWords():void {
-        this.RelevantWords = this.getAllWords().filter(s=>s.startsWith(this.Letter));
+        this.wordsService.getStartsWithWordsPromise(this.Letter).then(words=>this.RelevantWords = words);
      }
-
-     getAllWords():string[] {
-     return this.wordsService.getWords();
-    }
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
-//import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AtoZComponent } from './atoz.component'
@@ -16,7 +16,7 @@ import { WordDisplayComponent } from './word-display.component'
   imports: [
     BrowserModule,
     FormsModule,
-    //CommonModule
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

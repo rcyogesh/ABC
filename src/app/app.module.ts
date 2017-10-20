@@ -6,12 +6,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AtoZComponent } from './atoz.component'
 import { WordDisplayComponent } from './word-display.component'
+import { BPComponent } from './bp.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     AtoZComponent,
     WordDisplayComponent,
+    BPComponent
   ],
   imports: [
     BrowserModule,

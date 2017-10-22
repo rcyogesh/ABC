@@ -21,8 +21,4 @@ export class AtoZComponent {
 
     Letters: Array<string>;
     SelectedLetter : string;
-    //  = [
-    //     "A",
-    //     "B"
-    // ];
 }

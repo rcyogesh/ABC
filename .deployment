@@ -1,2 +1,2 @@
 [config]
-command = pwd
+command = build.cmd

@@ -108,7 +108,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 pwd
 cd d:/home/site/wwwroot
 pwd
-node_modules\.bin\ng build --base-href /dist/ --prod
+node_modules\.bin\ng build --base-href /dist/ --progress false --prod
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end

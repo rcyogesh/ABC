@@ -1,5 +1,6 @@
 import {Component} from '@angular/core'
 import { Http } from '@angular/http';
+import { environment } from '../environments/environment';
 
 @Component({
  selector:'bp',
@@ -16,8 +17,15 @@ export class BPComponent
     OnSubmit() {
         let message = JSON.stringify(this.BP); 
         console.log(message);
-        let url = "http://localhost:1337";
-        
+
+        let url = "";
+        if (environment.production) {
+            url = "/service";
+        }
+        else {
+            url = "http://localhost:1337";
+        }
+
         try{
             this.http.post(url, message)
                 .toPromise();

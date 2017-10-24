@@ -105,7 +105,9 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
+pwd
 cd d:/home/site/wwwroot
+pwd
 node_modules\.bin\ng build --base-href /dist/ --prod
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

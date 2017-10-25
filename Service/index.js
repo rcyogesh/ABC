@@ -46,7 +46,8 @@ var server = http.createServer(function(request, response) {
             response.end("Please specify a letter");
         }
     }
-}catch(err){
+}
+catch(err){
     response.write(err.toString());
     response.end();
 }

@@ -7,7 +7,8 @@ const qs = require('querystring');
 const fs = require('fs');
 
 var server = http.createServer(function(request, response) {
-    const parsedURL = url.parse(request.url, true);
+    try{
+        const parsedURL = url.parse(request.url, true);
 
     //console.log(parsedURL.href);
     if(parsedURL.href.toLowerCase().startsWith("/dist")) {
@@ -45,6 +46,10 @@ var server = http.createServer(function(request, response) {
             response.end("Please specify a letter");
         }
     }
+}catch(err){
+    response.write(err.toString());
+    response.end();
+}
 });
 
 var port = process.env.PORT || 1337;

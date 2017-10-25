@@ -4,9 +4,18 @@ const util = require('util');
 const letterFunction = require('./letter');
 const bp = require('./bp');
 const qs = require('querystring');
+const fs = require('fs');
 
 var server = http.createServer(function(request, response) {
     const parsedURL = url.parse(request.url, true);
+
+    //console.log(parsedURL.href);
+    if(parsedURL.href.toLowerCase().startsWith("/dist")) {
+        response.write(fs.readFileSync('.'+request.url));
+        response.end();
+        return;
+    }
+
     if(parsedURL.href.toLowerCase().indexOf("favicon.ico") != -1)
     {
         response.end();

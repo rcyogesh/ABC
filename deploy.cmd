@@ -110,6 +110,10 @@ cd d:/home/site/wwwroot
 pwd
 node_modules\.bin\ng build --base-href /dist/ --progress false --prod
 
+echo Now starting service
+node Service\index.js
+echo Done
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
 

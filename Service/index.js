@@ -12,7 +12,7 @@ var server = http.createServer(function(request, response) {
 
     //console.log(parsedURL.href);
     if(parsedURL.href.toLowerCase().startsWith("/dist")) {
-        response.write(fs.readFileSync('.'+request.url));
+        response.write(fs.readFileSync('..'+request.url));
         response.end();
         return;
     }

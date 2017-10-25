@@ -33,6 +33,9 @@ var server = http.createServer(function(request, response) {
             let json = wholeData.toString();
             bp.process(JSON.parse(json));
         })
+
+        response.writeHead(200);
+        response.end();
     }
     else {
         response.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin":"http://localhost:4200"});

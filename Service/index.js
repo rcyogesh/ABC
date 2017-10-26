@@ -5,14 +5,31 @@ const letterFunction = require('./letter');
 const bp = require('./bp');
 const qs = require('querystring');
 const fs = require('fs');
+// using SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+const sgMail = require('@sendgrid/mail');
 
+sgMail.setApiKey('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');
+const msg = {
+  to: 'rcyogesh@gmail.com',
+  from: 'rcyogesh@gmail.com',
+  subject: 'Server starting up',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+sgMail.send(msg);
+
+let relPath='.';
+if(process.env.PORT == 80) {
+    relPath = '..';
+}
 var server = http.createServer(function(request, response) {
     try{
         const parsedURL = url.parse(request.url, true);
 
     //console.log(parsedURL.href);
     if(parsedURL.href.toLowerCase().startsWith("/dist")) {
-        response.write(fs.readFileSync('..'+request.url));
+        response.write(fs.readFileSync(relPath+request.url));
         response.end();
         return;
     }

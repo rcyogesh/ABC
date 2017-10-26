@@ -9,7 +9,6 @@ const fs = require('fs');
 // https://github.com/sendgrid/sendgrid-nodejs
 const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey('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');
 const msg = {
   to: 'rcyogesh@gmail.com',
   from: 'rcyogesh@gmail.com',

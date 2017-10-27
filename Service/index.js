@@ -12,32 +12,20 @@ require('dotenv').config();
 
 console.log(process.env.email);
 
-sgMail.setApiKey(process.env.sendkey);
-const msg = {
-  to: process.env.email,
-  from: process.env.email,
-  subject: 'Server starting up',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-};
-sgMail.send(msg);
+// sgMail.setApiKey(process.env.sendkey);
+// const msg = {
+//   to: process.env.email,
+//   from: process.env.email,
+//   subject: 'Server starting up',
+//   text: 'and easy to do anywhere, even with Node.js',
+//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+// };
+// sgMail.send(msg);
 
 var server = http.createServer(function(request, response) {
-    try{
+    try {
         const parsedURL = url.parse(request.url, true);
-
-    if(parsedURL.href.toLowerCase().startsWith("/dist")) {
-        response.write(fs.readFileSync(process.env.relpath + request.url));
-        response.end();
-        return;
-    }
-
-    if(parsedURL.href.toLowerCase().indexOf("favicon.ico") != -1)
-    {
-        response.end();
-        return;
-    }
-
+        
     if(request.method=="POST") {
         var wholeData = '';
         request.on('data', (data)=> {
@@ -53,15 +41,21 @@ var server = http.createServer(function(request, response) {
         response.end();
     }
     else {
-        response.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin":"http://localhost:4200"});
-
         var letter = parsedURL.query.letter;
 
         if(letter != "" && letter != undefined){
+        response.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin":"http://localhost:4200"});    
             letterFunction.process(letter, response);
         }
         else {
-            response.end("Please specify a letter");
+            //Serve the app
+            let path = process.env.relpath + request.url;
+            if(!fs.existsSync(path) || fs.lstatSync(path).isDirectory())
+            {
+                path = process.env.relpath + "/dist/index.html";
+            }
+            response.write(fs.readFileSync(path));
+            response.end();
         }
     }
 }

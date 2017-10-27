@@ -17,8 +17,8 @@ module.exports = {
             'utf8');
 
          let msg = {
-                to: 'rcyogesh@gmail.com',
-                from: 'rcyogesh@gmail.com',
+                to: process.env.email,
+                from: process.env.email,
                 subject: 'BP Backup',
                 text: fs.readFileSync(bpFile, 'utf8'),
               };

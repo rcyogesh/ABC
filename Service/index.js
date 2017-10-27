@@ -8,27 +8,26 @@ const fs = require('fs');
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 const sgMail = require('@sendgrid/mail');
+require('dotenv').config();
 
+console.log(process.env.email);
+
+sgMail.setApiKey(process.env.sendkey);
 const msg = {
-  to: 'rcyogesh@gmail.com',
-  from: 'rcyogesh@gmail.com',
+  to: process.env.email,
+  from: process.env.email,
   subject: 'Server starting up',
   text: 'and easy to do anywhere, even with Node.js',
   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
 };
 sgMail.send(msg);
 
-let relPath='.';
-if(process.env.PORT == 80) {
-    relPath = '..';
-}
 var server = http.createServer(function(request, response) {
     try{
         const parsedURL = url.parse(request.url, true);
 
-    //console.log(parsedURL.href);
     if(parsedURL.href.toLowerCase().startsWith("/dist")) {
-        response.write(fs.readFileSync(relPath+request.url));
+        response.write(fs.readFileSync(process.env.relpath + request.url));
         response.end();
         return;
     }

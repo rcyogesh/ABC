@@ -18,16 +18,8 @@ export class BPComponent
         let message = JSON.stringify(this.BP); 
         console.log(message);
 
-        let url = "";
-        if (environment.production) {
-            url = "/service";
-        }
-        else {
-            url = "http://localhost:1337";
-        }
-
         try{
-            this.http.post(url, message)
+            this.http.post("/", message)
                 .toPromise();
         }
         catch(err)

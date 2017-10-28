@@ -13,17 +13,7 @@ export class WordsProviderService {
     }
     
     public getStartsWithWordsPromise(firstPart:string):Promise<string[]> {
-        // return Promise.resolve(
-        //     ["yellow"]);
-
-        let url = "";
-        if (environment.production) {
-            url = "/service";
-        }
-        else {
-            url = "http://localhost:1337";
-        }
-        url = url + "/?letter=" + firstPart;
+        let url = "/?letter=" + firstPart;
         console.log(url);
         return this.http.get(url)
                 .toPromise()

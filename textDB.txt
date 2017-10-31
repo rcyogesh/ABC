@@ -55,3 +55,5 @@ Yellow
 Yacht
 Zebra
 Zero
+Octopus
+Quilt

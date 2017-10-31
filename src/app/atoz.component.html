@@ -1,8 +1,7 @@
-<h1>AtoZStart</h1>
+<h1>Tap on any letter</h1>
 <span *ngFor="let l of Letters" class="letters"
     (click)="OnSelect(l)">
     <span class="badge">{{l}}</span>
 </span>
 
-  <word-display [Letter]="SelectedLetter"></word-display>
-<h1>AtoZEnd</h1>
+<word-display [Letter]="SelectedLetter"></word-display>

@@ -14,6 +14,9 @@ export class WordsProviderService {
     
     public getStartsWithWordsPromise(firstPart:string):Promise<string[]> {
         let url = "/?letter=" + firstPart;
+        if(!environment.production) {
+            url = "http://localhost:1337" + url;
+        }
         console.log(url);
         return this.http.get(url)
                 .toPromise()

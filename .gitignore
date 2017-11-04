@@ -99,3 +99,10 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# Specific ignored files
+bp.txt
+commitDeploy.bat
+nghelp.txt
+test.js
+prod.env

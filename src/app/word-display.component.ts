@@ -15,11 +15,23 @@ export class WordDisplayComponent {
          this._letter=l;
          this.GetRelevantWords();
      }
+
+     @Input() ShowAllWords:boolean = true;
      RelevantWords:string[];
 
      constructor(private wordsService:WordsProviderService) {}
 
      GetRelevantWords():void {
-        this.wordsService.getStartsWithWordsPromise(this.Letter).then(words=>this.RelevantWords = words);
+         if(this.ShowAllWords) {
+            this.wordsService.getStartsWithWordsPromise(this.Letter).then(words=>this.RelevantWords = words);
+         }
+         else
+         {
+            this.wordsService.getStartsWithWordsPromise(this.Letter).then(word=> {
+                let w= [];
+                w.push(word);
+                this.RelevantWords = w;
+            });            
+         }
      }
 }

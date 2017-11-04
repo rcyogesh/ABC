@@ -19,6 +19,7 @@ export class AtoZComponent {
         this.SelectedLetter = l;
     }
 
+    ShowAllWords: boolean;
     Letters: Array<string>;
-    SelectedLetter : string;
+    SelectedLetter : string = 'A';
 }

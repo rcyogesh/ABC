@@ -1,29 +1,24 @@
 var http = require('http');
-const url = require('url');
-const util = require('util');
-const letterFunction = require('./letter');
-const bp = require('./bp');
-const qs = require('querystring');
-const fs = require('fs');
-// using SendGrid's v3 Node.js Library
-// https://github.com/sendgrid/sendgrid-nodejs
-const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
 console.log(process.env.email);
 
-// sgMail.setApiKey(process.env.sendkey);
-// const msg = {
-//   to: process.env.email,
-//   from: process.env.email,
-//   subject: 'Server starting up',
-//   text: 'and easy to do anywhere, even with Node.js',
-//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-// };
-// sgMail.send(msg);
+if(process.env.sendkey != undefined) {
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.sendkey);
+    const msg = {
+        to: process.env.email,
+        from: process.env.email,
+        subject: 'Server starting up',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    };
+    sgMail.send(msg);
+}
 
 var server = http.createServer(function(request, response) {
     try {
+        const url = require('url');
         const parsedURL = url.parse(request.url, true);
         
     if(request.method=="POST") {
@@ -34,6 +29,7 @@ var server = http.createServer(function(request, response) {
 
         request.on('end', ()=>{
             let json = wholeData.toString();
+            const bp = require('./bp');
             bp.process(JSON.parse(json));
         })
 
@@ -42,14 +38,17 @@ var server = http.createServer(function(request, response) {
     }
     else {
         var letter = parsedURL.query.letter;
+        var onlyOneWord = parsedURL.query.OnlyOneWord;
 
         if(letter != "" && letter != undefined){
         response.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin":"http://localhost:4200"});    
-            letterFunction.process(letter, response);
+            const letterFunction = require('./letter');
+            letterFunction.process(letter, onlyOneWord != 'true', response);
         }
         else {
             //Serve the app
             let path = process.env.relpath + request.url;
+            const fs = require('fs');
             if(!fs.existsSync(path) || fs.lstatSync(path).isDirectory())
             {
                 path = process.env.relpath + "/dist/index.html";

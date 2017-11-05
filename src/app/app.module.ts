@@ -24,6 +24,9 @@ import { BPComponent } from './bp.component'
       {
         path: 'BP',
         component: BPComponent
+      },{
+        path: '',
+        component: AtoZComponent
       }
     ]
       )

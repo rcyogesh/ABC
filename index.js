@@ -1,21 +1,12 @@
+log = buildLog('starting up');
 var http = require('http');
+log += buildLog('loaded http');
 require('dotenv').config();
+log += buildLog('loaded env');
 
 console.log(process.env.email);
 
-if(process.env.sendkey != undefined) {
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey(process.env.sendkey);
-    const msg = {
-        to: process.env.email,
-        from: process.env.email,
-        subject: 'Server starting up',
-        text: 'and easy to do anywhere, even with Node.js',
-        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-    };
-    sgMail.send(msg);
-}
-
+log += buildLog('creating server');
 var server = http.createServer(function(request, response) {
     try {
         const url = require('url');
@@ -63,8 +54,26 @@ catch(err){
     response.end();
 }
 });
+log += buildLog('created server');
 
 var port = process.env.PORT || 1337;
 server.listen(port);
+log += buildLog('listening');
 
 console.log("Server running at http://localhost:%d", port);
+console.log(log);
+if(process.env.sendkey != undefined) {
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey(process.env.sendkey);
+    const msg = {
+        to: process.env.email,
+        from: process.env.email,
+        subject: 'Server starting up',
+        text: log,
+    };
+    sgMail.send(msg);
+}
+
+function buildLog(log) {
+    return new Date().toJSON() + ' ' + log + '\n';
+}

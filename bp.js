@@ -10,10 +10,10 @@ module.exports = {
     process: function(BP) {
         let date = new Date();
         fs.appendFileSync(bpFile,
-            util.format("%d/%d/%d %d:%d:%d, %d, %d, %d, %d\r\n",
+            util.format("%d/%d/%d %d:%d:%d, %d, %d, %d, %d, %s\r\n",
              date.getMonth() + 1, date.getDate(), date.getFullYear(),
              date.getHours(), date.getMinutes(), date.getSeconds(), 
-             BP.Systolic, BP.Diastolic, BP.HB, BP.Weight),
+             BP.Systolic, BP.Diastolic, BP.HB, BP.Weight, JSON.stringify(BP)),
             'utf8');
 
          let msg = {

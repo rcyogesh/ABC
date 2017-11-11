@@ -27,7 +27,7 @@ export class WordDisplayComponent {
          }
          else
          {
-            this.wordsService.getStartsWithWordsPromise(this.Letter).then(word=> {
+            this.wordsService.getSingleStartsWithWordPromise(this.Letter).then(word=> {
                 let w= [];
                 w.push(word);
                 this.RelevantWords = w;

@@ -4,4 +4,6 @@
     <span class="badge">{{l}}</span>
 </span>
 
+<input type="checkbox" [(ngModel)]="ShowAllWords" placeholder="Show All Words" />
+
 <word-display [Letter]="SelectedLetter" [ShowAllWords]="ShowAllWords"></word-display>

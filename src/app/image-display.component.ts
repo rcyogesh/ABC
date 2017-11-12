@@ -21,6 +21,6 @@ export class ImageDisplayComponent {
      }
      
     GetImageURL(): any {
-        throw new Error("Method not implemented.");
+        this.wordsService.getImage(this.SearchTerm).then(url=>this.ImageURL = url);
     }
 }

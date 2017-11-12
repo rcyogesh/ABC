@@ -35,6 +35,18 @@ export class WordsProviderService {
                 .then(response => response.json() as string[])
              .catch(this.handleError);
     }
+    
+    public getImage(SearchTerm:string): Promise<string> {
+        let url = "/?GetImageFor=" + SearchTerm;
+        if(!environment.production) {
+            url = "http://localhost:1337" + url;
+        }
+        return this.http.get(url)
+                .toPromise()
+                .then(response => response.json() as string)
+             .catch(this.handleError);
+    }
+
 
     private handleError(error:any) : Promise<any> {
         return Promise.reject(error.message || error);

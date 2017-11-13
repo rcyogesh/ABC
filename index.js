@@ -30,11 +30,17 @@ var server = http.createServer(function(request, response) {
     else {
         var letter = parsedURL.query.letter;
         var onlyOneWord = parsedURL.query.OnlyOneWord;
+        var imgSearchTerm = parsedURL.query.GetImageFor;
 
         if(letter != "" && letter != undefined){
         response.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin":"http://localhost:4200"});    
             const letterFunction = require('./letter');
             letterFunction.process(letter, onlyOneWord != 'true', response);
+        }
+        else if(imgSearchTerm != "" && imgSearchTerm != undefined){
+        response.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin":"http://localhost:4200"});    
+            const imageFunction = require('./image');
+            imageFunction.process(imgSearchTerm, response);
         }
         else {
             //Serve the app

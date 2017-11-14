@@ -12,9 +12,11 @@ function handleGoogleResponse(gres, response) {
 
 
         gres.on('end', ()=>{
-            //console.log(wholeData);
-            //let json = wholeData.toString();
-            
+            //console.log(wholeData.toString());
+            let json = wholeData.toString();
+            let obj = JSON.parse(json);
+           // response.write(json);
+            response.write(obj.items[0].pagemap.cse_thumbnail[0].src);
     response.end();
         })
 }

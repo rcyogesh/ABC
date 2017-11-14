@@ -15,7 +15,7 @@ export class ImageDisplayComponent {
 
     private _searchTerm:string;
     get SearchTerm():string{ return this._searchTerm;}
-     @Input() set Letter(l:string) {
+     @Input() set SearchTerm(l:string) {
          this._searchTerm=l;
          this.GetImageURL();
      }

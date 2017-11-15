@@ -16,7 +16,8 @@ function handleGoogleResponse(gres, response) {
             let json = wholeData.toString();
             let obj = JSON.parse(json);
            // response.write(json);
-            response.write(obj.items[0].pagemap.cse_thumbnail[0].src);
+           let imgUrl = obj.items[0].pagemap.cse_thumbnail[0].src;
+            response.write(JSON.stringify(imgUrl));
     response.end();
         })
 }

@@ -7,16 +7,15 @@ import { WordsProviderService } from './words-provider.service';
   providers: [WordsProviderService]
 })
 export class ImageDisplayComponent {
-    constructor(private wordsService:WordsProviderService) {
-        this.ImageURL="https://static01.nyt.com/images/2017/11/12/opinion/12jacobsdouglas/12jacobsdouglas-mediumFlexible177-v5.jpg";
-    }
+    constructor(private wordsService:WordsProviderService) { }
 
-    ImageURL:string="https://static01.nyt.com/images/2017/11/12/opinion/12jacobsdouglas/12jacobsdouglas-mediumFlexible177-v5.jpg";
+    ImageURL:string;
 
     private _searchTerm:string;
     get SearchTerm():string{ return this._searchTerm;}
      @Input() set SearchTerm(l:string) {
          this._searchTerm=l;
+         this.ImageURL=undefined;
          this.GetImageURL();
      }
      

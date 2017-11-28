@@ -1,5 +1,7 @@
 <h1>{{Letter}}</h1>
 <span *ngFor="let l of RelevantWords">
-<span style="background-color:orange; color:black; font-size:large">{{l}}</span>
+<div style="color:black; font-size:large; text-align:center">{{l}}</div>
 </span>
-<image-display [SearchTerm]="RelevantWords[0]"></image-display>
+<span style="text-align:center">
+    <image-display [SearchTerm]="RelevantWords[0]"></image-display>
+</span>

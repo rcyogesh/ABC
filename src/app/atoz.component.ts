@@ -16,10 +16,11 @@ export class AtoZComponent {
     }
 
     OnSelect(l:string) {
+        this.SelectedLetter = '';
         this.SelectedLetter = l;
     }
 
     ShowAllWords: boolean;
     Letters: Array<string>;
-    SelectedLetter : string = 'A';
+    SelectedLetter : string;
 }

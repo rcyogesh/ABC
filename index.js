@@ -24,7 +24,7 @@ var server = http.createServer(function(request, response) {
             bp.process(JSON.parse(json));
         })
 
-        response.writeHead(200);
+        response.writeHead(200, {"Access-Control-Allow-Origin":"http://localhost:4200"});
         response.end();
     }
     else {

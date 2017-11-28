@@ -19,8 +19,16 @@ export class BPComponent
         console.log(message);
 
         try{
-            this.http.post("/", message)
-                .toPromise();
+            let url = "/";
+            if(!environment.production) {
+                url = "http://localhost:1337" + url;
+            }
+            this.http.post(url, message)
+                .toPromise()
+                .then(res => {
+                    console.log('then');
+                    this.BP = new BP();
+                })
         }
         catch(err)
         {
